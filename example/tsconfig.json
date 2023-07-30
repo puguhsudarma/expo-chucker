@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "expo-chucker": ["../src/index"],
+      "expo-chucker/*": ["../src/*"]
+    }
+  }
+}
