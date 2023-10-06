@@ -3,6 +3,7 @@ import {
   ConfigPlugin,
   withAndroidManifest,
   withPlugins,
+  withGradleProperties,
 } from "@expo/config-plugins";
 import { addPermission } from "@expo/config-plugins/build/android/Permissions";
 
@@ -38,12 +39,24 @@ const withPermission: ConfigPlugin = (config) => {
   });
 };
 
-export const withExpoChucker: ConfigPlugin<{ enabled?: boolean }> = (
+const withFlagGradleProperties: ConfigPlugin<{ enabled?: boolean }> = (config, { enabled = false }) => {
+  return withGradleProperties(config, (config) => {
+    config.modResults.push({
+      type: "property",
+      key: "CHUCKER_ENABLED",
+      value: enabled ? "true" : "false",
+    });
+    return config;
+  });
+};
+
+export const withExpoChucker: ConfigPlugin<{ enabled?: boolean; }> = (
   config,
   { enabled } = { enabled: true }
 ) => {
   return withPlugins(config, [
     [withFlagMetadataMainApplication, { enabled }],
+    [withFlagGradleProperties, { enabled }],
     withPermission,
   ]);
 };

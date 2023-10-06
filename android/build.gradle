@@ -26,6 +26,8 @@ buildscript {
     }
   }
 
+  ext.chuckerEnabled = project.properties["CHUCKER_ENABLED"] ?: "false"
+
   repositories {
     mavenCentral()
   }
@@ -88,6 +90,10 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${getKotlinVersion()}"
 
   implementation("com.facebook.react:react-android")
-  debugImplementation "com.github.chuckerteam.chucker:library:4.0.0"
-  releaseImplementation "com.github.chuckerteam.chucker:library-no-op:4.0.0"
+  if (chuckerEnabled.toBoolean()) {
+    implementation "com.github.chuckerteam.chucker:library:4.0.0"
+  } else {
+    debugImplementation "com.github.chuckerteam.chucker:library:4.0.0"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:4.0.0"
+  }
 }
