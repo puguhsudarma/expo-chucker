@@ -88,6 +88,13 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${getKotlinVersion()}"
 
   implementation("com.facebook.react:react-android")
-  debugImplementation "com.github.chuckerteam.chucker:library:4.0.0"
-  releaseImplementation "com.github.chuckerteam.chucker:library-no-op:4.0.0"
+
+  // get CHUCKER_ENABLED flag from gradle.properties
+  def isEnabledChucker = project.hasProperty('CHUCKER_ENABLED') ? CHUCKER_ENABLED.toBoolean() : true
+
+  if (isEnabledChucker) {
+    implementation "com.github.chuckerteam.chucker:library:4.0.0"
+  } else {
+    implementation "com.github.chuckerteam.chucker:library-no-op:4.0.0"
+  }
 }

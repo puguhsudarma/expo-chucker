@@ -1,49 +1,43 @@
 import {
   AndroidConfig,
   ConfigPlugin,
-  withAndroidManifest,
+  withGradleProperties,
   withPlugins,
 } from "@expo/config-plugins";
-import { addPermission } from "@expo/config-plugins/build/android/Permissions";
 
 // add flag enabled/disabled to activate chucker at dev discretion
-const withFlagMetadataMainApplication: ConfigPlugin<{ enabled?: boolean }> = (
+const withEnabledFlag: ConfigPlugin<{ enabled: boolean }> = (
   config,
   { enabled }
 ) => {
-  return withAndroidManifest(config, async (config) => {
-    const mainApplication = AndroidConfig.Manifest.getMainApplicationOrThrow(
-      config.modResults
-    );
-
-    const isEnabled = typeof enabled === "undefined" ? true : enabled;
-
-    AndroidConfig.Manifest.addMetaDataItemToMainApplication(
-      mainApplication,
+  // adding CHUCKER_ENABLED flag to gradle.properties
+  const gradleProperties = withGradleProperties(config, (gradleConfig) => {
+    AndroidConfig.BuildProperties.updateAndroidBuildProperty(
+      gradleConfig.modResults,
       "CHUCKER_ENABLED",
-      isEnabled ? "true" : "false"
+      enabled ? "true" : "false"
     );
 
-    return config;
+    return gradleConfig;
   });
+
+  return gradleProperties;
 };
 
 const withPermission: ConfigPlugin = (config) => {
-  return withAndroidManifest(config, async (config) => {
-    const androidManifest = config.modResults;
+  const permissions = AndroidConfig.Permissions.withPermissions(config, [
+    "android.permission.POST_NOTIFICATIONS",
+  ]);
 
-    addPermission(androidManifest, "android.permission.POST_NOTIFICATIONS");
-
-    return config;
-  });
+  return permissions;
 };
 
 export const withExpoChucker: ConfigPlugin<{ enabled?: boolean }> = (
   config,
-  { enabled } = { enabled: true }
+  { enabled }
 ) => {
   return withPlugins(config, [
-    [withFlagMetadataMainApplication, { enabled }],
+    [withEnabledFlag, { enabled: enabled ?? true }],
     withPermission,
   ]);
 };

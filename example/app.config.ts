@@ -28,6 +28,6 @@ export default (): ExpoConfig => {
     web: {
       favicon: "./assets/favicon.png",
     },
-    plugins: ["../app.plugin.js"],
+    plugins: [["../app.plugin.js", { enabled: true }]],
   };
 };

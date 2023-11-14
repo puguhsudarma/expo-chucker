@@ -1,8 +1,6 @@
 package com.chucker
 
 import android.content.Context
-import android.content.pm.PackageManager
-import android.util.Log
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.facebook.react.modules.network.OkHttpClientFactory
 import com.facebook.react.modules.network.OkHttpClientProvider
@@ -15,16 +13,8 @@ class ChuckerModule : Module() {
         Name("Chucker")
 
         OnCreate {
-            val isEnabled = context.packageManager.getApplicationInfo(
-                context.packageName,
-                PackageManager.GET_META_DATA
-            ).metaData.getBoolean("CHUCKER_ENABLED", true)
-
-            Log.d("Chucker", "isEnabled: $isEnabled")
-
-            if (isEnabled) {
-                OkHttpClientProvider.setOkHttpClientFactory(CustomNetworkModule(context))
-            }
+            // already checked chucker no-op in gradle dependencies
+            OkHttpClientProvider.setOkHttpClientFactory(CustomNetworkModule(context))
         }
     }
 
