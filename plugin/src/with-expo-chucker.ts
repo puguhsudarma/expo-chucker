@@ -1,43 +1,14 @@
-import {
-  AndroidConfig,
-  ConfigPlugin,
-  withGradleProperties,
-  withPlugins,
-} from "@expo/config-plugins";
+import { ConfigPlugin, withPlugins } from "@expo/config-plugins";
+import { withEnabledFlag } from "./with-enabled-flag";
+import { withPermissions } from "./with-permissions";
 
-// add flag enabled/disabled to activate chucker at dev discretion
-const withEnabledFlag: ConfigPlugin<{ enabled: boolean }> = (
-  config,
-  { enabled }
-) => {
-  // adding CHUCKER_ENABLED flag to gradle.properties
-  const gradleProperties = withGradleProperties(config, (gradleConfig) => {
-    AndroidConfig.BuildProperties.updateAndroidBuildProperty(
-      gradleConfig.modResults,
-      "CHUCKER_ENABLED",
-      enabled ? "true" : "false"
-    );
+interface Props {
+  enabled?: boolean;
+}
 
-    return gradleConfig;
-  });
-
-  return gradleProperties;
-};
-
-const withPermission: ConfigPlugin = (config) => {
-  const permissions = AndroidConfig.Permissions.withPermissions(config, [
-    "android.permission.POST_NOTIFICATIONS",
-  ]);
-
-  return permissions;
-};
-
-export const withExpoChucker: ConfigPlugin<{ enabled?: boolean }> = (
-  config,
-  { enabled }
-) => {
+export const withExpoChucker: ConfigPlugin<Props> = (config, { enabled }) => {
   return withPlugins(config, [
     [withEnabledFlag, { enabled: enabled ?? true }],
-    withPermission,
+    withPermissions,
   ]);
 };

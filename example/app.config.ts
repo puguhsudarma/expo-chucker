@@ -17,6 +17,16 @@ export default (): ExpoConfig => {
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.chucker.example",
+      googleServicesFile: "./GoogleService-Info.plist",
+      privacyManifests: {
+        NSPrivacyAccessedAPITypes: [
+          {
+            NSPrivacyAccessedAPIType:
+              "NSPrivacyAccessedAPICategoryUserDefaults",
+            NSPrivacyAccessedAPITypeReasons: ["CA92.1"],
+          },
+        ],
+      },
     },
     android: {
       adaptiveIcon: {
@@ -24,10 +34,32 @@ export default (): ExpoConfig => {
         backgroundColor: "#ffffff",
       },
       package: "com.chucker.example",
+      googleServicesFile: "./google-services.json",
     },
     web: {
       favicon: "./assets/favicon.png",
     },
-    plugins: [["../app.plugin.js", { enabled: true }]],
+    plugins: [
+      "@react-native-firebase/app",
+      [
+        "expo-build-properties",
+        {
+          android: {
+            extraMavenRepos: [
+              "../../node_modules/@notifee/react-native/android/libs",
+            ],
+          },
+          ios: {
+            useFrameworks: "static",
+          },
+        },
+      ],
+      [
+        "../app.plugin.js",
+        {
+          enabled: true,
+        },
+      ],
+    ],
   };
 };
