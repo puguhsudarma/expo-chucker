@@ -1,6 +1,7 @@
 import {
   AndroidConfig,
   ConfigPlugin,
+  withAndroidManifest,
   withGradleProperties,
   withPlugins,
 } from "@expo/config-plugins";
@@ -27,9 +28,34 @@ const withEnabledFlag: ConfigPlugin<{ enabled: boolean }> = (
 const withPermission: ConfigPlugin = (config) => {
   const permissions = AndroidConfig.Permissions.withPermissions(config, [
     "android.permission.POST_NOTIFICATIONS",
+    "android.permission.WAKE_LOCK",
   ]);
 
   return permissions;
+};
+
+const withModifyWakeLockPermission: ConfigPlugin = (config) => {
+  return withAndroidManifest(config, async (config) => {
+    let androidManifest = config.modResults.manifest;
+
+    // add the tools to apply permission remove
+    androidManifest.$ = {
+      ...androidManifest.$,
+      "xmlns:tools": "http://schemas.android.com/tools",
+    };
+
+    // add remove property to the audio record permission
+    androidManifest["uses-permission"] = androidManifest[
+      "uses-permission"
+    ]?.map((perm) => {
+      if (perm.$["android:name"] === "android.permission.WAKE_LOCK") {
+        perm.$["tools:node"] = "replace";
+      }
+      return perm;
+    });
+
+    return config;
+  });
 };
 
 export const withExpoChucker: ConfigPlugin<{ enabled?: boolean }> = (
@@ -39,5 +65,6 @@ export const withExpoChucker: ConfigPlugin<{ enabled?: boolean }> = (
   return withPlugins(config, [
     [withEnabledFlag, { enabled: enabled ?? true }],
     withPermission,
+    withModifyWakeLockPermission,
   ]);
 };
