@@ -37,16 +37,27 @@ If you want to enable it only for staging, not the production build (obviously),
 ```js
 plugins: [
   [
-    'expo-chucker',
+    "expo-chucker",
     {
-      enabled: process.env.APP_ENV === 'staging' // Only enable Chucker on staging environment
-    }
-  ]
-]
+      enabled: process.env.APP_ENV === "staging", // Only enable Chucker on staging environment
+    },
+  ],
+];
 ```
 
 Don't forget to prebuild your app each time you made changes to the config.
 
-# Contributing
+### Example App
 
-Contributions are very welcome! Please refer to guidelines described in the [contributing guide](https://github.com/expo/expo#contributing).
+1. Clone this repo
+2. Run `yarn install` to install the dependencies
+3. Run `yarn build` to build the expo plugin
+4. Goto `example` directory
+5. Run `yarn install` to install the dependencies for the example app
+6. You need to have firebase project and get the `google-services.json` and `GoogleService-Info.plist` and put it in the `example/` directory. This is required for testing the push notification feature crashed by chucker library (see [here](https://github.com/ChuckerTeam/chucker/issues/1077))
+7. Run `yarn prebuild` to prebuild the app
+8. Run `yarn android` to run the app on android device or emulator
+
+### Contributing
+
+Contributions are very welcome!.
