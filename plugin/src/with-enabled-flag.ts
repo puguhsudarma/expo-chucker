@@ -2,11 +2,11 @@ import {
   AndroidConfig,
   ConfigPlugin,
   withGradleProperties,
-} from "@expo/config-plugins";
+} from "expo/config-plugins";
 
 export const withEnabledFlag: ConfigPlugin<{ enabled: boolean }> = (
   config,
-  { enabled }
+  { enabled },
 ) => {
   // adding CHUCKER_ENABLED flag to gradle.properties
   return withGradleProperties(config, (gradleConfig) => {
@@ -15,7 +15,7 @@ export const withEnabledFlag: ConfigPlugin<{ enabled: boolean }> = (
     AndroidConfig.BuildProperties.updateAndroidBuildProperty(
       gradleConfig.modResults,
       propertyName,
-      enabled ? "true" : "false"
+      enabled ? "true" : "false",
     );
 
     return gradleConfig;

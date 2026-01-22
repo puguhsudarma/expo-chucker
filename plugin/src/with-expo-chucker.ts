@@ -1,4 +1,4 @@
-import { ConfigPlugin, withPlugins } from "@expo/config-plugins";
+import { ConfigPlugin, withPlugins } from "expo/config-plugins";
 import { withEnabledFlag } from "./with-enabled-flag";
 import { withPermissions } from "./with-permissions";
 

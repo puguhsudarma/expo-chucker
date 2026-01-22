@@ -2,7 +2,7 @@ import {
   AndroidConfig,
   ConfigPlugin,
   withAndroidManifest,
-} from "@expo/config-plugins";
+} from "expo/config-plugins";
 
 const withModifyWakeLockPermission: ConfigPlugin = (config) => {
   const PERMISSION_NAME = "android.permission.WAKE_LOCK";
