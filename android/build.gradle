@@ -1,7 +1,21 @@
 apply plugin: 'com.android.library'
 
 group = 'com.chucker'
-version = '1.3.0'
+import groovy.json.JsonSlurper
+
+def getPackageJson() {
+    def inputFile = new File(rootProject.projectDir, '../package.json')
+    return new JsonSlurper().parseText(inputFile.text)
+}
+
+def packageJson = getPackageJson()
+version = packageJson.version
+
+def getVersionCodeFromVersion(String version) {
+    def (major, minor, patch) = version.tokenize('.')
+    return (major.toInteger() * 10000) + (minor.toInteger() * 100) + patch.toInteger()
+}
+
 
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
 apply from: expoModulesCorePlugin
@@ -34,8 +48,8 @@ if (useManagedAndroidSdkVersions) {
 android {
   namespace "com.chucker"
   defaultConfig {
-    versionCode 2
-    versionName "1.3.0"
+    versionCode getVersionCodeFromVersion(version)
+    versionName version
   }
   lintOptions {
     abortOnError false
