@@ -6,6 +6,12 @@ Kudos to ChuckerTeam for providing this great library. It allows HTTP(S) inspect
 
 This will ONLY works on Android, and there's no plan to support iOS, as the Chucker does.
 
+### Compatible Version
+
+| expo-chucker | expo |
+| :----------: | :--: |
+|    1.3.0     |  52  |
+
 ### Add the package to your npm dependencies
 
 ```bash
@@ -50,13 +56,12 @@ Don't forget to prebuild your app each time you made changes to the config.
 ### Example App
 
 1. Clone this repo
-2. Run `yarn install` to install the dependencies
-3. Run `yarn build` to build the expo plugin
+2. Run `pnpm install` to install the dependencies
+3. Run `pnpm build` to build the expo plugin
 4. Goto `example` directory
-5. Run `yarn install` to install the dependencies for the example app
-6. You need to have firebase project and get the `google-services.json` and `GoogleService-Info.plist` and put it in the `example/` directory. This is required for testing the push notification feature crashed by chucker library (see [here](https://github.com/ChuckerTeam/chucker/issues/1077))
-7. Run `yarn prebuild` to prebuild the app
-8. Run `yarn android` to run the app on android device or emulator
+5. Run `pnpm install` to install the dependencies for the example app
+6. Run `pnpm prebuild --clean --no-install` to prebuild the app
+7. Run `pnpm android --no-build-cache` to run the app on android device or emulator
 
 ### Contributing
 
