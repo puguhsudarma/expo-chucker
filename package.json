@@ -1,6 +1,6 @@
 {
   "name": "expo-chucker",
-  "version": "0.1.5",
+  "version": "1.3.0",
   "description": "Chucker wrapper in expo react native",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -20,7 +20,7 @@
     "react-native",
     "expo",
     "expo-chucker",
-    "Chucker"
+    "chucker"
   ],
   "repository": "https://github.com/puguhsudarma/expo-chucker",
   "bugs": {
@@ -29,12 +29,12 @@
   "author": "reroet <wayanpuguhsudarma@gmail.com> (https://github.com/puguhsudarma)",
   "license": "MIT",
   "homepage": "https://github.com/puguhsudarma/expo-chucker#readme",
-  "dependencies": {},
   "devDependencies": {
-    "@expo/config-plugins": "^7.8.4",
-    "@types/react": "^18.0.25",
-    "expo-module-scripts": "^3.0.11",
-    "expo-modules-core": "^1.5.7"
+    "@types/react": "~18.3.27",
+    "expo": "~52.0.0",
+    "expo-module-scripts": "^5.0.8",
+    "react-native": "0.76.9",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "expo": "*",
