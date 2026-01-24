@@ -16,7 +16,6 @@ def getVersionCodeFromVersion(String version) {
     return (major.toInteger() * 10000) + (minor.toInteger() * 100) + patch.toInteger()
 }
 
-
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
 apply from: expoModulesCorePlugin
 applyKotlinExpoModulesCorePlugin()
@@ -46,7 +45,7 @@ if (useManagedAndroidSdkVersions) {
 }
 
 android {
-  namespace "com.chucker"
+  namespace group
   defaultConfig {
     versionCode getVersionCodeFromVersion(version)
     versionName version
