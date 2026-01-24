@@ -1,15 +1,29 @@
-import { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, StyleSheet, Text } from "react-native";
+import * as Notifications from 'expo-notifications';
+import { useEffect, useState, useTransition } from "react";
+import { ActivityIndicator, Button, FlatList, SafeAreaView, StyleSheet, Text } from "react-native";
 
 export default function App() {
   const [users, setUsers] = useState<User[]>([]);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    getGithubUsers().then((users) => setUsers(users));
+    requestPermissionsAsync();
   }, []);
+
+  function handlePress() {
+    startTransition(() => {
+      getGithubUsers().then((users) => setUsers(users));
+    });
+  }
 
   return (
     <SafeAreaView style={styles.container}>
+      <Button
+        title="Do HTTP Request"
+        onPress={handlePress}
+        disabled={isPending}
+      />
+      {isPending && <ActivityIndicator />}
       <FlatList
         data={users}
         renderItem={({ item }) => (
@@ -26,6 +40,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingTop: 50,
+    gap: 16,
+    paddingHorizontal: 16,
   },
   text: {
     marginBottom: 16,
@@ -53,6 +70,11 @@ async function getGithubUsers(): Promise<User[]> {
     return response.json() as Promise<User[]>;
   } catch (e) {
     console.error(e);
+    console.log(JSON.stringify(e, null, 2));
     return [];
   }
+}
+
+function requestPermissionsAsync() {
+  return Notifications.requestPermissionsAsync();
 }

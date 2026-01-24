@@ -9,7 +9,9 @@
     "resizeMode": "contain",
     "backgroundColor": "#ffffff"
   },
-  "assetBundlePatterns": ["**/*"],
+  "assetBundlePatterns": [
+    "**/*"
+  ],
   "ios": {
     "supportsTablet": true,
     "bundleIdentifier": "com.chucker.example"
@@ -25,6 +27,7 @@
     "favicon": "./assets/favicon.png"
   },
   "plugins": [
+    "expo-notifications",
     [
       "../app.plugin.js",
       {

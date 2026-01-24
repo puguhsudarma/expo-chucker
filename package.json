@@ -31,9 +31,10 @@
   "homepage": "https://github.com/puguhsudarma/expo-chucker#readme",
   "devDependencies": {
     "@types/react": "~18.3.27",
-    "expo-module-scripts": "^5.0.8",
     "expo": "~52.0.0",
-    "react-native": "0.76.9"
+    "expo-module-scripts": "^5.0.8",
+    "react-native": "0.76.9",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "expo": "*",
