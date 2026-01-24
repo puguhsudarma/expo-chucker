@@ -9,3 +9,15 @@ __tests__
 /android/src/test/
 /android/build/
 /example/
+
+# Config files
+.eslintrc.js
+.prettierrc
+.release-it.json
+tsconfig.json
+
+# Source files (we publish build/)
+src/
+plugin/src/
+plugin/tsconfig.json
+plugin/tsconfig.tsbuildinfo
