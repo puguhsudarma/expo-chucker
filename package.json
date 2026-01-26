@@ -14,7 +14,8 @@
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module",
     "open:ios": "open -a \"Xcode\" example/ios",
-    "open:android": "open -a \"Android Studio\" example/android"
+    "open:android": "open -a \"Android Studio\" example/android",
+    "release": "release-it"
   },
   "keywords": [
     "react-native",
@@ -30,10 +31,12 @@
   "license": "MIT",
   "homepage": "https://github.com/puguhsudarma/expo-chucker#readme",
   "devDependencies": {
+    "@release-it/conventional-changelog": "^10.0.4",
     "@types/react": "~18.3.27",
     "expo": "~52.0.0",
     "expo-module-scripts": "^5.0.8",
     "react-native": "0.76.9",
+    "release-it": "^19.2.4",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
