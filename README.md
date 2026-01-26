@@ -8,9 +8,10 @@ This will ONLY works on Android, and there's no plan to support iOS, as the Chuc
 
 ### Compatible Version
 
-| expo-chucker | expo |
-| :----------: | :--: |
-|    1.3.0     |  52  |
+| expo-chucker | expo | chucker |
+| :----------: | :--: | :-----: |
+|    1.3.0     | >=52 |  4.1.0  |
+|    0.1.5     |  51  |  4.0.0  |
 
 ### Add the package to your npm dependencies
 

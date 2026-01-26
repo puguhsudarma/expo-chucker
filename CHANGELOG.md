@@ -6,19 +6,18 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Feature: Add Wake Lock Permission with replace configuration in `AndroidManifest.xml` (#6)
-- Feat: Improve Gradle Dependency Install (#3)
-
-### Fixed
-
-- Fix: Compile / Build with Expo SDK 50 (#5)
+- Feature: Add Wake Lock Permission with replace configuration in `AndroidManifest.xml`
+- Feat: Improve Gradle Dependency Instal
 
 ### Changed
 
-- Upgrade: Support for Expo 52 (#8)
+- Upgrade: Support for Expo >=52
+- Upgrade: Using Chucker 4.1.0
 
 ## [0.1.5] - 2024-05-22
 
 ### Added
 
 - Initial release
+- Support for Expo SDK 51
+- Using Chucker 4.0.0
