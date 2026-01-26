@@ -4,12 +4,13 @@ on:
   release:
     types: [published]
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -32,4 +33,4 @@ jobs:
         run: pnpm run build
 
       - name: Publish to NPM
-        run: pnpm publish --provenance --no-git-checks --ignore-scripts
+        run: pnpm publish --no-git-checks --ignore-scripts
