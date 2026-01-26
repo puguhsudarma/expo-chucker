@@ -4,9 +4,6 @@
   "description": "Chucker wrapper in expo react native",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "files": [
-    "build"
-  ],
   "scripts": {
     "reset": "find . -type dir -name node_modules | xargs rm -rfv && watchman watch-del-all && yarn install",
     "build": "expo-module build",
