@@ -1,15 +1,7 @@
 apply plugin: 'com.android.library'
 
-group = 'com.chucker'
-import groovy.json.JsonSlurper
-
-def getPackageJson() {
-    def inputFile = new File(rootProject.projectDir, '../package.json')
-    return new JsonSlurper().parseText(inputFile.text)
-}
-
-def packageJson = getPackageJson()
-version = packageJson.version
+group = "com.chucker"
+version = "1.3.0"
 
 def getVersionCodeFromVersion(String version) {
     def (major, minor, patch) = version.tokenize('.')
@@ -45,10 +37,10 @@ if (useManagedAndroidSdkVersions) {
 }
 
 android {
-  namespace group
+  namespace "com.chucker"
   defaultConfig {
-    versionCode getVersionCodeFromVersion(version)
-    versionName version
+    versionCode getVersionCodeFromVersion("1.3.0")
+    versionName "1.3.0"
   }
   lintOptions {
     abortOnError false
@@ -56,14 +48,14 @@ android {
 }
 
 dependencies {
-  implementation "com.facebook.react:react-android:0.76.9"
+  implementation "com.facebook.react:react-android:${safeExtGet('reactNativeVersion', '+')}"
 
   // get CHUCKER_ENABLED flag from gradle.properties
   def isEnabledChucker = project.hasProperty('CHUCKER_ENABLED') ? CHUCKER_ENABLED.toBoolean() : true
 
   if (isEnabledChucker) {
-    implementation "com.github.chuckerteam.chucker:library:4.0.0"
+    implementation "com.github.chuckerteam.chucker:library:4.1.0"
   } else {
-    implementation "com.github.chuckerteam.chucker:library-no-op:4.0.0"
+    implementation "com.github.chuckerteam.chucker:library-no-op:4.1.0"
   }
 }
