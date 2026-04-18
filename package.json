@@ -1,7 +1,7 @@
 {
   "name": "expo-chucker",
   "version": "1.4.0",
-  "description": "Chucker wrapper in expo react native",
+  "description": "Android HTTP(S) inspector for Expo — wraps Chucker for network debugging",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
@@ -13,7 +13,8 @@
     "expo-module.config.json",
     "package.json",
     "README.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "scripts": {
     "reset": "find . -type dir -name node_modules | xargs rm -rfv && watchman watch-del-all && pnpm install",
@@ -24,7 +25,6 @@
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module",
-    "open:ios": "open -a \"Xcode\" example/ios",
     "open:android": "open -a \"Android Studio\" example/android",
     "release": "release-it"
   },
@@ -32,9 +32,16 @@
     "react-native",
     "expo",
     "expo-chucker",
-    "chucker"
+    "chucker",
+    "android",
+    "http-inspector",
+    "network-debug",
+    "react-native-module"
   ],
-  "repository": "https://github.com/puguhsudarma/expo-chucker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/puguhsudarma/expo-chucker.git"
+  },
   "bugs": {
     "url": "https://github.com/puguhsudarma/expo-chucker/issues"
   },
