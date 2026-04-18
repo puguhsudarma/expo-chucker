@@ -1,6 +1,6 @@
 {
   "name": "expo-chucker",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Chucker wrapper in expo react native",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -16,7 +16,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "reset": "find . -type dir -name node_modules | xargs rm -rfv && watchman watch-del-all && yarn install",
+    "reset": "find . -type dir -name node_modules | xargs rm -rfv && watchman watch-del-all && pnpm install",
     "build": "expo-module build",
     "clean": "expo-module clean",
     "lint": "expo-module lint",
@@ -43,15 +43,16 @@
   "homepage": "https://github.com/puguhsudarma/expo-chucker#readme",
   "devDependencies": {
     "@release-it/conventional-changelog": "^10.0.4",
-    "@types/react": "~18.3.27",
-    "expo": "~52.0.0",
-    "expo-module-scripts": "^5.0.8",
-    "react-native": "0.76.9",
+    "@types/react": "~19.2.0",
+    "expo": "~55.0.0",
+    "expo-module-scripts": "^55.0.2",
+    "react": "19.2.0",
+    "react-native": "0.83.4",
     "release-it": "^19.2.4",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "expo": "*",
+    "expo": ">=52.0.0",
     "react": "*",
     "react-native": "*"
   }

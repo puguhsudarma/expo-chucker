@@ -1,5 +1,4 @@
 import { requireNativeModule } from "expo";
 
-const Chucker = requireNativeModule("ExpoChucker");
-
-export default Chucker;
+// Auto-initializes HTTP inspection on Android via OkHttp interceptor. No callable API.
+requireNativeModule("Chucker");
