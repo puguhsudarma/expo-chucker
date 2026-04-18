@@ -1,7 +1,7 @@
 {
   "name": "expo-chucker",
-  "version": "1.3.0",
-  "description": "Chucker wrapper in expo react native",
+  "version": "1.4.0",
+  "description": "Android HTTP(S) inspector for Expo — wraps Chucker for network debugging",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
@@ -13,10 +13,11 @@
     "expo-module.config.json",
     "package.json",
     "README.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "scripts": {
-    "reset": "find . -type dir -name node_modules | xargs rm -rfv && watchman watch-del-all && yarn install",
+    "reset": "find . -type dir -name node_modules | xargs rm -rfv && watchman watch-del-all && pnpm install",
     "build": "expo-module build",
     "clean": "expo-module clean",
     "lint": "expo-module lint",
@@ -24,7 +25,6 @@
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module",
-    "open:ios": "open -a \"Xcode\" example/ios",
     "open:android": "open -a \"Android Studio\" example/android",
     "release": "release-it"
   },
@@ -32,9 +32,16 @@
     "react-native",
     "expo",
     "expo-chucker",
-    "chucker"
+    "chucker",
+    "android",
+    "http-inspector",
+    "network-debug",
+    "react-native-module"
   ],
-  "repository": "https://github.com/puguhsudarma/expo-chucker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/puguhsudarma/expo-chucker.git"
+  },
   "bugs": {
     "url": "https://github.com/puguhsudarma/expo-chucker/issues"
   },
@@ -43,15 +50,16 @@
   "homepage": "https://github.com/puguhsudarma/expo-chucker#readme",
   "devDependencies": {
     "@release-it/conventional-changelog": "^10.0.4",
-    "@types/react": "~18.3.27",
-    "expo": "~52.0.0",
-    "expo-module-scripts": "^5.0.8",
-    "react-native": "0.76.9",
+    "@types/react": "~19.2.0",
+    "expo": "~55.0.0",
+    "expo-module-scripts": "^55.0.2",
+    "react": "19.2.0",
+    "react-native": "0.83.4",
     "release-it": "^19.2.4",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "expo": "*",
+    "expo": ">=52.0.0",
     "react": "*",
     "react-native": "*"
   }

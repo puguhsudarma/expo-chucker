@@ -1,6 +1,6 @@
-import * as Notifications from 'expo-notifications';
+import * as Notifications from "expo-notifications";
 import { useEffect, useState, useTransition } from "react";
-import { ActivityIndicator, Button, FlatList, SafeAreaView, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, Button, FlatList, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -17,12 +17,8 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Button
-        title="Do HTTP Request"
-        onPress={handlePress}
-        disabled={isPending}
-      />
+    <View style={styles.container}>
+      <Button title="Do HTTP Request" onPress={handlePress} disabled={isPending} />
       {isPending && <ActivityIndicator />}
       <FlatList
         data={users}
@@ -32,7 +28,7 @@ export default function App() {
           </Text>
         )}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -40,7 +36,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 50,
+    paddingTop: 70,
+    paddingBottom: 16,
     gap: 16,
     paddingHorizontal: 16,
   },

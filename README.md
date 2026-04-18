@@ -1,69 +1,110 @@
 # expo-chucker
 
-A [Chucker](https://github.com/ChuckerTeam/chucker) wrapper for Expo.
+[![npm version](https://img.shields.io/npm/v/expo-chucker.svg)](https://www.npmjs.com/package/expo-chucker)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform: Android](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com)
 
-Kudos to ChuckerTeam for providing this great library. It allows HTTP(S) inspector on Android devices, useful for network debugging when in release mode. At the time I wrote this library, there's no easy way to integrate Chucker with React Native especially in Expo project.
+An [Expo](https://expo.dev) wrapper for [Chucker](https://github.com/ChuckerTeam/chucker) — an in-app HTTP(S) inspector for Android. Useful for network debugging without needing a proxy or desktop tools.
 
-This will ONLY works on Android, and there's no plan to support iOS, as the Chucker does.
+> **Android only.** Chucker has no iOS equivalent, so this library does not support iOS.
 
-### Compatible Version
+## How it works
 
-| expo-chucker | expo | chucker |
-| :----------: | :--: | :-----: |
-|    1.3.0     | >=52 |  4.1.0  |
-|    0.1.5     |  51  |  4.0.0  |
+Once installed and configured, expo-chucker automatically intercepts all HTTP(S) traffic made by your app via React Native's OkHttp client. Intercepted requests appear as Android notifications. Tap a notification to open the Chucker inspector UI.
 
-### Add the package to your npm dependencies
+No JavaScript API is exposed — the module initializes itself on app startup via Expo's autolinking.
+
+## Compatible Versions
+
+| expo-chucker | expo     | chucker |
+| :----------: | :------: | :-----: |
+|    1.4.0     | 53,54,55 |  4.2.0  |
+|    1.3.0     | 52       |  4.1.0  |
+|    0.1.5     | 51       |  4.0.0  |
+
+> **New Architecture**: expo-chucker 1.4.0 supports Expo SDK 55 which requires New Architecture (React Native 0.83).
+
+## Installation
+
+```bash
+npx expo install expo-chucker
+```
+
+Or with npm/yarn/pnpm:
 
 ```bash
 npm install expo-chucker
-
+# or
+yarn add expo-chucker
+# or
+pnpm add expo-chucker
 ```
 
-or
+## Setup
+
+### 1. Add the config plugin
+
+In your `app.json` or `app.config.ts`:
+
+```json
+{
+  "plugins": ["expo-chucker"]
+}
+```
+
+### 2. Enable only for non-production builds (recommended)
+
+```js
+// app.config.ts
+export default {
+  plugins: [
+    [
+      "expo-chucker",
+      {
+        enabled: process.env.APP_ENV !== "production",
+      },
+    ],
+  ],
+};
+```
+
+When `enabled` is `false`, the library-no-op variant of Chucker is used — zero overhead in production.
+
+### 3. Prebuild
 
 ```bash
-yarn add expo-chucker
-
+npx expo prebuild --clean
 ```
 
-### Add the Expo config-plugin
+Run prebuild again whenever you change the plugin config.
 
-Add the plugin to your `app.json` / `app.config.ts` file.
+## Usage
 
-```js
-...
-plugins: [
-  'expo-chucker',
-]
+Nothing to import. Once installed and prebuilt, Chucker intercepts all OkHttp traffic automatically. HTTP requests appear as Android notifications — tap to inspect request/response details.
 
+## Permissions
+
+The config plugin automatically adds these Android permissions:
+
+- `POST_NOTIFICATIONS` — required to show Chucker notifications
+- `WAKE_LOCK` — required by Chucker's notification service
+
+## Development / Example App
+
+```bash
+# from repo root
+pnpm install
+pnpm build
+
+# then in example/
+cd example
+pnpm install
+pnpm prebuild --clean --no-install
+pnpm android --no-build-cache
 ```
 
-If you want to enable it only for staging, not the production build (obviously), there's an `enabled` props you can use. For example:
+## Contributing
 
-```js
-plugins: [
-  [
-    "expo-chucker",
-    {
-      enabled: process.env.APP_ENV === "staging", // Only enable Chucker on staging environment
-    },
-  ],
-];
-```
+Contributions are welcome. Please open an issue first for major changes.
 
-Don't forget to prebuild your app each time you made changes to the config.
-
-### Example App
-
-1. Clone this repo
-2. Run `pnpm install` to install the dependencies
-3. Run `pnpm build` to build the expo plugin
-4. Goto `example` directory
-5. Run `pnpm install` to install the dependencies for the example app
-6. Run `pnpm prebuild --clean --no-install` to prebuild the app
-7. Run `pnpm android --no-build-cache` to run the app on android device or emulator
-
-### Contributing
-
-Contributions are very welcome!.
+See [CHANGELOG.md](./CHANGELOG.md) for release history.
