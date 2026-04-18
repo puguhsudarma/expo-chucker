@@ -88,12 +88,16 @@ pnpm lint             # lint
 pnpm release          # bump version + tag + publish (uses release-it)
 ```
 
-Example app:
+Example app (full test flow):
 ```bash
+# 1. root — installs deps + auto-builds plugin via prepare script
+pnpm install
+
+# 2. example app
 cd example
 pnpm install
-pnpm prebuild --clean --no-install
-pnpm android --no-build-cache
+pnpm prebuild --clean --no-install   # regenerate android/ from config plugin
+pnpm android --no-build-cache        # build APK + start Expo dev server + launch on device
 ```
 
 ## Known constraints
