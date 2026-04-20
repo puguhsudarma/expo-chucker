@@ -1,5 +1,6 @@
 import * as Notifications from "expo-notifications";
 import { useEffect, useState, useTransition } from "react";
+import { UploadTest } from "./UploadTest";
 import { ActivityIndicator, Button, FlatList, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Button title="Do HTTP Request" onPress={handlePress} disabled={isPending} />
+      <UploadTest />
       {isPending && <ActivityIndicator />}
       <FlatList
         data={users}
