@@ -1,6 +1,6 @@
 {
   "name": "expo-chucker",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Android HTTP(S) inspector for Expo — wraps Chucker for network debugging",
   "main": "build/index.js",
   "types": "build/index.d.ts",

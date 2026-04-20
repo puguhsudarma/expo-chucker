@@ -18,6 +18,7 @@ No JavaScript API is exposed — the module initializes itself on app startup vi
 
 | expo-chucker | expo     | chucker |
 | :----------: | :------: | :-----: |
+|    1.4.1     | 53,54,55 |  4.2.0  |
 |    1.4.0     | 53,54,55 |  4.2.0  |
 |    1.3.0     | 52       |  4.1.0  |
 |    0.1.5     | 51       |  4.0.0  |
