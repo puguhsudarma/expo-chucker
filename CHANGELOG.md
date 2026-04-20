@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2026-04-20
+
+### Fixed
+
+- Fix: Prevent multipart body stream consumption that caused crashed/empty request body when uploading files (by [@seif-rashad](https://github.com/seif-rashad))
+
+### Added
+
+- Add UploadTest component in example app for multipart upload testing
+
 ## [1.4.0] - 2026-04-18
 
 ### Changed
